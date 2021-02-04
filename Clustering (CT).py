@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 19 19:30:27 2020
-
-@author: Lenovo
-"""
-
 import matplotlib.pyplot as plt 
 import numpy as np 
 import pandas as pd 
@@ -206,46 +199,3 @@ scatter =plt.scatter(data2.ApplicantIncome,data2.LoanAmount,c=data2.labels)
 handles,labels= scatter.legend_elements(prop='colors')
 plt.legend(handles,labels,loc='lower right')
 
-
-##CT 06
-
-url='https://stackabuse.s3.amazonaws.com/files/hierarchical-clustering-with-python-and-scikit-learn-shopping-data.csv'
-import matplotlib.pyplot as plt
-import pandas as pd
-#%matplotlib inline
-import numpy as np
-df = pd.read_csv(url)
-#customer_data = pd.read_csv('data/shopping-data.csv')
-customer_data = df.copy()
-customer_data.head()
-#explore data
-customer_data
-customer_data.head()
-customer_data.shape
-customer_data.describe()
-customer_data.columns
-
-#rename columns
-customer_data.columns = ['customerID', 'genre', 'age', 'income', 'spendscore']
-customer_data.head()
-#Our dataset has five columns: CustomerID, Genre, Age, Annual Income, and Spending Score. To view the results in two-dimensional feature space, we will retain only two of these five columns. We can remove CustomerID column, Genre, and Age column. We will retain the Annual Income (in thousands of dollars) and Spending Score (1-100) columns. The Spending Score column signifies how often a person spends money in a mall on a scale of 1 to 100 with 100 being the highest spender. 
-
-data = customer_data.iloc[:, 2:5]
-data
-
-
-plt.figure(figsize=(10, 7))
-plt.title("Customer Dendograms")
-dend = shc.dendrogram(shc.linkage(data, method='ward'))    
-plt.show();
-
-
-
-from sklearn.cluster import AgglomerativeClustering
-
-cluster = AgglomerativeClustering(n_clusters=4, affinity='euclidean', linkage='ward')
-pred = cluster.fit_predict(data)
-pred
-
-data['labels'] = pred
-data
